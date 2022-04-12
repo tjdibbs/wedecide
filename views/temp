@@ -1,0 +1,28 @@
+<tbody>
+                        <% // for( let index=0; index < result[2].length; index++ ) { %>
+                          <tr>
+                            <td>
+                              <%= // result[2][index].name %>
+                            </td>
+                            <td>
+                              <%= // result[2][index].numberOfPoll %>
+                            </td>
+                            <td>
+                              <%= // result[2][index].price %>
+                            </td>
+                            <td>
+                              <label class="badge badge-gradient-success">
+                                Ongoing
+                              </label>
+                            </td>
+                            <td>
+                              <%= // result[2][index].end_date %>
+                            </td>
+                          </tr>
+                         <% } %>
+
+
+ <!-- <h2 class="mb-5"> <%= // result[3][0].numberOfContest %> </h2> -->
+
+
+ <%= // result[0][0].numberOfElection %>

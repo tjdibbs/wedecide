@@ -1,0 +1,147 @@
+# Admin 
+CREATE TABLE `wedecide`.`admin` ( 
+    `id` INT(11) NULL AUTO_INCREMENT , 
+    `name` VARCHAR(50) NOT NULL , 
+    `username` VARCHAR(50) NOT NULL , 
+    `email` VARCHAR(100) NOT NULL , 
+    `password` VARCHAR(25) NOT NULL , 
+    PRIMARY KEY (`id`), 
+    UNIQUE `username` (`username`), 
+    UNIQUE `ind_email` (`email`)) 
+    ENGINE = InnoDB;
+
+# Election
+CREATE TABLE `wedecide`.`election` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT , 
+    `admin_id` INT(11) NOT NULL , 
+    `name` VARCHAR(250) NOT NULL , 
+    `price` VARCHAR(10) NOT NULL DEFAULT '0' , 
+    `start_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `end_date` DATETIME NOT NULL , 
+    `reg_start_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `reg_end_date` DATETIME NOT NULL , 
+    `description` VARCHAR(300) NOT NULL , 
+    PRIMARY KEY (`id`), 
+    UNIQUE `ind_elect_name` (`name`)) 
+    ENGINE = InnoDB;
+
+# Poll
+CREATE TABLE `wedecide`.`poll` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT , 
+    `election_id` INT(11) NOT NULL , 
+    `name` VARCHAR(100) NOT NULL , 
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+# Candidate
+CREATE TABLE `wedecide`.`candidate` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `election_id` INT(11) NOT NULL ,  
+    `poll_id` INT(11) NOT NULL , 
+    `name` VARCHAR(150) NOT NULL , 
+    `vote` VARCHAR(100) NOT NULL , 
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+# Voters
+CREATE TABLE `wedecide`.`voter` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT , 
+    `username` VARCHAR(100) NOT NULL , 
+    `email` VARCHAR(256) NOT NULL , 
+    `password` VARCHAR(100) NOT NULL , 
+    `phone` VARCHAR(13) NOT NULL , 
+    `election_id` INT(11) NOT NULL , 
+    `paid_fees` TINYINT(2) NOT NULL DEFAULT '0' , 
+    `face_path` VARCHAR(256) NOT NULL , 
+    `vote` TINYINT(2) NOT NULL DEFAULT '0' ,     
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+# contest
+CREATE TABLE `wedecide`.`contest` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT , 
+    `admin_id` INT(11) NOT NULL , 
+    `name` VARCHAR(250) NOT NULL , 
+    `price` VARCHAR(10) NOT NULL DEFAULT '0' , 
+    `start_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `end_date` DATETIME NOT NULL , 
+    `description` VARCHAR(300) NOT NULL , 
+    PRIMARY KEY (`id`), 
+    UNIQUE `ind_elect_name` (`name`)) 
+    ENGINE = InnoDB;
+
+
+# Contestant_Poll
+CREATE TABLE `wedecide`.`contestant_poll` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT , 
+    `contest_id` INT(11) NOT NULL , 
+    `name` VARCHAR(100) NOT NULL , 
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+# Contestant
+CREATE TABLE `wedecide`.`contestant` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `contest_id` INT(11) NOT NULL ,  
+    `poll_id` INT(11) NOT NULL , 
+    `name` VARCHAR(150) NOT NULL , 
+    `vote` VARCHAR(100) NOT NULL DEFAULT '0', 
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+
+# Voters Contest
+CREATE TABLE `wedecide`.`contest_voter` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `name` VARCHAR(128) NOT NULL ,
+    `email` VARCHAR(256) NOT NULL ,
+    `voucher` VARCHAR(100) NOT NULL ,
+    `phone` VARCHAR(15) NOT NULL ,
+    `contest_id` INT(11) NOT NULL ,
+    `vote` TINYINT(2) NOT NULL DEFAULT '0' ,
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+ALTER TABLE `wedecide`.`election`
+  ADD paid TINYINT(2) NOT NULL DEFAULT '0'
+    AFTER description;
+
+ALTER TABLE `wedecide`.`contest`
+  ADD paid TINYINT(2) NOT NULL DEFAULT '0'
+    AFTER description;
+
+# Payment Receipt 
+CREATE TABLE `wedecide`.`receipt` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `ref` VARCHAR(100) NOT NULL ,
+    `admin_id` INT(11) NOT NULL ,
+    `election_id` INT(11) NOT NULL DEFAULT '0',
+    `contest_id` INT(11) NOT NULL DEFAULT '0',
+    `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,     
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+ALTER TABLE `wedecide`.`receipt`
+  ADD email VARCHAR(200) NOT NULL DEFAULT 'Not Mail!'
+    AFTER contest_id;
+
+ALTER TABLE `wedecide`.`receipt`
+  ADD fullname VARCHAR(200) NOT NULL DEFAULT 'No Name!'
+    AFTER contest_id;
+
+ALTER TABLE `wedecide`.`voter`
+  ADD voucher VARCHAR(200) NOT NULL DEFAULT 'No Voucher!'
+    AFTER password;
+
+ALTER TABLE voter DROP COLUMN paid_fees;
+ALTER TABLE election DROP COLUMN price;
+ALTER TABLE contest DROP COLUMN price;
+
+ALTER TABLE `wedecide`.`voter`
+  ADD reg_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    AFTER face_path;
+
+ALTER TABLE `wedecide`.`contest_voter`
+  ADD reg_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    AFTER contest_id;
+

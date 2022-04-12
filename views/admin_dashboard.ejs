@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>WeDecide</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css" />
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- End layout styles -->
+  <!-- <link rel="shortcut icon" href="images/favicon.ico" /> -->
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="/admin">
+          <h1>WeDecide</h1>
+        </a>
+        <a class="navbar-brand brand-logo-mini" href="/admin">
+          <img src="images/logo-mini.svg" alt="logo" />
+        </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="mdi mdi-menu"></span>
+        </button>
+        <div class="search-field d-none d-md-block">
+          <form class="d-flex align-items-center h-100" action="#">
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+              </div>
+              <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects" />
+            </div>
+          </form>
+        </div>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item d-none d-lg-block full-screen-link">
+            <a class="nav-link">
+              <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+            </a>
+          </li>
+
+          <li class="nav-item nav-logout d-none d-lg-block">
+            <a class="nav-link" href="/admin/logout">
+              <i class="mdi mdi-power"></i>
+            </a>
+          </li>
+
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+
+      <!-- partial -->
+      <div class="main-panel col-lg-12 col-12">
+        <div class="content-wrapper">
+
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+              </span>
+              Dashboard
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span></span>
+                  Overview
+                  <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-md-6 stretch-card grid-margin">
+              <a class="col-md-12" href="/admin/create-election">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Create Election
+                </button>
+              </a>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <a class="col-md-12" href="/admin/manage-election">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Manage Election
+                </button>
+              </a>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <a class="col-md-12" href="/admin/create-contest">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Create Contest
+                </button>
+              </a>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <a class="col-md-12" href="/admin/manage-contest">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Manage Contest
+                </button>
+              </a>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <a target="_blank" class="col-md-12" href="/voter/register-election">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Register Election
+                </button>
+              </a>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <a target="_blank" class="col-md-12" href="/voter/register-contest">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Register Contest
+                </button>
+              </a>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <a target="_blank" class="col-md-12" href="/voter/vote-election">
+                <button type="button" class="btn btn-gradient-primary btn-icon-text">
+                  <i class="mdi mdi-plus btn-icon-prepend"></i>
+                  Vote In An Election
+                </button>
+              </a>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 stretch-card grid-margin">
+              <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body">
+                  <img src="images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                  <h4 class="font-weight-normal mb-3">
+                    No of Elections
+                    <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-5">
+                    <%= result.elections.length %>
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <div class="card bg-gradient-info card-img-holder text-white">
+                <div class="card-body">
+                  <img src="images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                  <h4 class="font-weight-normal mb-3">
+                    No of Contests
+                    <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-5">
+                    <%= result.numberOfContest %>
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Recent Tickets</h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Election</th>
+                          <th>No of Polls</th>
+                          <th>Status</th>
+                          <th>End Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for( let index=0; index < result.elections.length; index++ ) { %>
+                          <tr>
+                            <td>
+                              <%= result.elections[index]?.name %>
+                            </td>
+                            <td>
+                              <%= result.elections[index]?.polls %>
+                            </td>
+                            <td>
+                              <label class="badge badge-gradient-success">
+                                Ongoing
+                              </label>
+                            </td>
+                            <td>
+                              <%= result.elections[index]?.end_date %>
+                            </td>
+                          </tr>
+                          <% } %>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="container-fluid clearfix">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+              Copyright © 2021
+            </span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+
+              Made by Hodaviahtechnologyagency
+              </a>
+
+            </span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <script src="js/misc.js"></script>
+
+</body>
+
+</html>

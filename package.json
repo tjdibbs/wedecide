@@ -1,0 +1,41 @@
+{
+	"name": "wedecide",
+	"version": "1.0.0",
+	"description": "We decide is an electronic voting site built under high technicality and dexterity by technical individuals. It is flexible and easy to use with transparency, accuracy and neutrality.",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"async": "^0.9.2",
+		"bcryptjs": "^2.4.3",
+		"chart.js": "^2.9.4",
+		"cloudinary": "^1.28.1",
+		"connect-flash": "^0.1.1",
+		"connect-mongo": "^4.6.0",
+		"cookie": "^0.4.0",
+		"cookie-parser": "^1.4.5",
+		"cookie-session": "^2.0.0",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.0",
+		"ejs": "^3.1.5",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"face-api.js": "^0.20.0",
+		"flash": "^1.1.0",
+		"formidable": "^2.0.1",
+		"jsonwebtoken": "^8.5.1",
+		"lodash": "^4.17.21",
+		"mobile-detect": "^1.4.5",
+		"mongoose": "^6.2.3",
+		"nodemailer": "^6.6.5",
+		"nodemon": "^2.0.13",
+		"passport": "^0.4.1",
+		"passport-local": "^1.0.0",
+		"socket.io": "^3.0.4",
+		"uuid": "^8.3.2"
+	}
+}

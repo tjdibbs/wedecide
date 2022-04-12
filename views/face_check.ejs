@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <script src="./face-api.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>WeDecide</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../voters/vendors/feather/feather.css" />
+  <link rel="stylesheet" href="/voters/vendors/ti-icons/css/themify-icons.css" />
+  <link rel="stylesheet" href="/voters/vendors/css/vendor.bundle.base.css" />
+  <link href="fontawesome/css/all.css" rel="stylesheet" />
+  <script defer src="fontawesome/js/all.js"></script>
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="voters/css/vertical-layout-light/style.css" />
+  <link rel="stylesheet" href="voters/css/loading.css" />
+  <!-- endinject -->
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+
+      <!-- partial -->
+      <div class="main-panel col-lg-12 col-12">
+        <div id="container" class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Facial Verification</h4>
+                  <p>
+                    Please Upload A Recent Image of You
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 stretch-card grid-margin">
+              <img id="myImage0" height="320" width="320" src="<%= result.face_path %> " crossorigin="anonymous"
+                alt="" />
+            </div>
+            <div class="col-md-6 stretch-card grid-margin">
+              <div class="row">
+                <img height="320" width="320" id="myImage1" src="#" alt="your image" />
+                <input accept="image/*" type="file" id="imgInp" />
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row">
+              <button
+                class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+              >
+                Check
+              </button>
+            </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="voters/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script>
+    container = document.getElementById('container')
+
+    var button = document.createElement('button')
+    button.type = 'button'
+    button.innerHTML = 'Check'
+    button.className =
+      'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+
+    var innerDiv = document.createElement('div')
+    innerDiv.className = 'row'
+
+    // Div For Loading
+    var loadingDiv = document.createElement('div')
+    loadingDiv.className = 'loader'
+
+    // Div for Face Dont Match
+    var dontRowMatchDiv = document.createElement('div')
+    var strenghtDiv = document.createElement('div')
+    var card = document.createElement('div')
+    var cardBody = document.createElement('div')
+    faceH4 = document.createElement('h4')
+
+    dontRowMatchDiv.className = 'row'
+    strenghtDiv.className = 'col-md-12 grid-margin stretch-card'
+    card.className = 'card'
+    cardBody.className = 'card-body'
+    faceH4.className = 'text-danger'
+    faceH4.innerHTML = "Face Don't Match"
+
+    function faceDontMatch() {
+      container.removeChild(loadingDiv)
+      dontRowMatchDiv.appendChild(strenghtDiv)
+      strenghtDiv.appendChild(card)
+      card.appendChild(cardBody)
+      cardBody.appendChild(faceH4)
+      container.appendChild(dontRowMatchDiv)
+    }
+
+    function reDir() {
+      window.location.href = '/voter/vote-election'
+    }
+
+    imgInp.onchange = (evt) => {
+      const [file] = imgInp.files
+      if (file) {
+        myImage1.src = URL.createObjectURL(file)
+        button.onclick = justWork
+        innerDiv.appendChild(button)
+        container.appendChild(innerDiv)
+
+      }
+    }
+
+    const MODEL_URL = './models'
+
+    async function justWork() {
+      try {
+        container.removeChild(dontRowMatchDiv)
+      } catch (error) {
+        console.log(error)
+      }
+      container.appendChild(loadingDiv)
+      await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)
+      await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL)
+      await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL)
+
+      const input0 = document.getElementById('myImage0')
+      const input1 = document.getElementById('myImage1')
+
+      console.log({ input0, input1 })
+      const detection1 = await faceapi
+        .detectAllFaces(input0)
+        .withFaceLandmarks()
+        .withFaceDescriptors()
+
+      const detection2 = await faceapi
+        .detectAllFaces(input1)
+        .withFaceLandmarks()
+        .withFaceDescriptors()
+
+      console.log({ detection1, detection2 })
+      const dis = faceapi.euclideanDistance(
+        detection1[0].descriptor,
+        detection2[0].descriptor,
+      )
+
+      console.log(detection1)
+      console.log(dis)
+
+      if (dis <= 0.4) {
+        container.removeChild(loadingDiv)
+        window.location.href = '/voter/election-center'
+      } else {
+        faceDontMatch()
+        window.setTimeout(reDir, 5000)
+      }
+    }
+  </script>
+  <script src="voters/js/hoverable-collapse.js"></script>
+  <script src="voters/js/template.js"></script>
+  <!-- endinject -->
+</body>
+
+</html>

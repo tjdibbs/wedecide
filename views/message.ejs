@@ -1,0 +1,17 @@
+<% if(error) { %>
+    <div class="alert alert-danger show fade">
+        <%= error %>
+            <button type=submit class="close" data-dismiss='alert' aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <% } %>
+
+        <% if(success) { %>
+            <div class="alert alert-success show fade">
+                <%= success %>
+                    <button type=submit class="close" data-dismiss='alert' aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <% } %>
