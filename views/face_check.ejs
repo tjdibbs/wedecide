@@ -117,9 +117,6 @@
                 <button class="btn btn-info" id="captureCam" disabled>
                   Capture
                 </button>
-                <button class="btn btn-info" id="stopCam" disabled>
-                  Stop Camera
-                </button>
                 <button class="btn btn-primary" id="recaptureCam" disabled>
                   Recapture
                 </button>
@@ -271,7 +268,6 @@
       const cam_wrap = document.querySelector(".cam-wrap");
       const capture_image = document.getElementById("c_im");
       const startCamBtn = document.getElementById("startCam");
-      const stopCamBtn = document.getElementById("stopCam");
       const captureCamBtn = document.getElementById("captureCam");
       const recaptureCamBtn = document.getElementById("recaptureCam");
       const verifyBtn = document.getElementById("verifyCam");
@@ -321,7 +317,6 @@
               captureCamBtn.disabled = false;
               recaptureCamBtn.disabled = true;
               verifyBtn.disabled = true;
-              stopCamBtn.disabled = false;
             },
 
             // errorCallback
@@ -367,7 +362,6 @@
         captureCamBtn.disabled = true;
         recaptureCamBtn.disabled = false;
         verifyBtn.disabled = false;
-        stopCamBtn.disabled = true;
       }
 
       function reCapture() {
