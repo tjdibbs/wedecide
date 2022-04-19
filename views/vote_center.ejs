@@ -1,131 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>WeDecide</title>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>WeDecide</title>
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="voters/css/vertical-layout-light/style.css" />
+    <!-- endinject -->
+  </head>
 
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="voters/vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="voters/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="voters/css/vertical-layout-light/style.css">
-  <!-- endinject -->
-</head>
-
-<body>
-  <div class="container-scroller">
-    <!-- partial:../../partials/_navbar.html -->
-    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="#">WeDecide</a>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-
-
-
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-          data-toggle="offcanvas">
-          <span class="icon-menu"></span>
-        </button>
-      </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-
-      <div class="main-panel col-lg-12 col-12">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <%- include("message") -%>
-                    <h4 class="card-title">
-                      <%= result.name %>
-                    </h4>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div
+          class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+        >
+          <a class="navbar-brand brand-logo mr-5" href="#">WeDecide</a>
+        </div>
+        <div
+          class="navbar-menu-wrapper d-flex align-items-center justify-content-end"
+        >
+          <button
+            class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+            type="button"
+            data-toggle="offcanvas"
+          >
+            <span class="icon-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <div class="main-panel col-lg-12 col-12">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <%- include("message") -%>
+                    <h4 class="card-title"><%= result.name %></h4>
                     <p class="card-description"></p>
-                    <form action="/voter/election-center" method="POST" class="forms-sample">
-                      <% for( let index=0; index < result.polls.length; index++ ) { %>
-                        <% var pollHasCandidates=result.candidates.filter((candidate)=> String(candidate.poll_id) ===
-                          String(result.polls[index]._id));
-                          if(!pollHasCandidates?.length) continue
-                          %>
-                          <div class="form-group">
-                            <label for="exampleInputName1">
-                              <%= result.polls[index].name %>
-                            </label>
-                            <% pollHasCandidates.map((candidate)=>{ %>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input"
-                                    name="<%= result.polls[index]._id %>/<%= result.polls[index].name %>"
-                                    value="<%= candidate._id %>" />
-                                  <%= candidate.name %>
-                                </label>
-                              </div>
-                              <% }) %>
-                          </div>
-                          <% } %>
-                            <div class="form-group">
-                              <input type="hidden" name="browser_fingerprint" id="fingerprint" value="">
-                            </div>
-                            <% if(result?.candidates?.length && result?.polls.length) { %>
-                              <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                              <% } %>
+                    <form
+                      action="/voter/election-center"
+                      method="POST"
+                      class="forms-sample"
+                    >
+                      <% for( let index=0; index < result.polls.length; index++
+                      ) { %> <% var
+                      pollHasCandidates=result.candidates.filter((candidate)=>
+                      String(candidate.poll_id) ===
+                      String(result.polls[index]._id));
+                      if(!pollHasCandidates?.length) continue %>
+                      <div class="form-group">
+                        <label for="exampleInputName1">
+                          <%= result.polls[index].name %>
+                        </label>
+                        <% pollHasCandidates.map((candidate)=>{ %>
+                        <div class="form-check form-check-inline" s>
+                          <input
+                            type="radio"
+                            class="form-check-input"
+                            name="<%= result.polls[index]._id %>/<%= result.polls[index].name %>"
+                            value="<%= candidate._id %>"
+                            id="<%= result.polls[index]._id %>"
+                          />
+                          <label
+                            class="form-check-label d-inline ml-0"
+                            for="<%= result.polls[index]._id %>"
+                          >
+                            <span><%= candidate.name %></span>
+                          </label>
+                        </div>
+                        <% }) %>
+                      </div>
+                      <% } %>
+                      <div class="form-group">
+                        <input
+                          type="hidden"
+                          name="browser_fingerprint"
+                          id="fingerprint"
+                          value=""
+                        />
+                      </div>
+                      <% if(result?.candidates?.length && result?.polls.length)
+                      { %>
+                      <button type="submit" class="btn btn-primary mr-2">
+                        Submit
+                      </button>
+                      <% } %>
                     </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer class="footer">
+            <div
+              class="d-sm-flex justify-content-center justify-content-sm-between"
+            >
+              <span
+                class="text-muted text-center text-sm-left d-block d-sm-inline-block"
+                >Copyright © 2022.
+                <a href="https://www.bootstrapdash.com/" target="_blank"
+                  >hodaviahtechnology</a
+                >
+                from tjdibbs. All rights reserved.</span
+              >
+              <span
+                class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
+                >will serve with love <i class="ti-heart text-danger ml-1"></i
+              ></span>
+            </div>
+          </footer>
+          <!-- partial -->
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021. Premium <a
-                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.
-              All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                class="ti-heart text-danger ml-1"></i></span>
-          </div>
-        </footer>
-        <!-- partial -->
+        <!-- main-panel ends -->
       </div>
-      <!-- main-panel ends -->
+      <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script>
-    // Initialize the agent at application startup.
-    const fpPromise = import('/js/fingerprint.js')
-      .then(FingerprintJS => FingerprintJS.load())
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script>
+      // Initialize the agent at application startup.
+      const fpPromise = import("/js/fingerprint.js").then((FingerprintJS) =>
+        FingerprintJS.load()
+      );
 
-    // Get the visitor identifier when you need it.
-    fpPromise
-      .then(fp => fp.get())
-      .then(result => {
-        // This is the visitor identifier:
-        const visitorId = result.visitorId
-        document.getElementById("fingerprint").value = visitorId
-      })
-  </script>
-  <script src="voters/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="voters/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="voters/vendors/select2/select2.min.js"></script>
-  <!-- End plugin js for this page -->
-
-  <!-- Custom js for this page-->
-  <script src="voters/js/file-upload.js"></script>
-  <script src="voters/js/typeahead.js"></script>
-  <script src="voters/js/select2.js"></script>
-  <!-- End custom js for this page-->
-</body>
-
+      // Get the visitor identifier when you need it.
+      fpPromise
+        .then((fp) => fp.get())
+        .then((result) => {
+          // This is the visitor identifier:
+          const visitorId = result.visitorId;
+          document.getElementById("fingerprint").value = visitorId;
+        });
+    </script>
+  </body>
 </html>

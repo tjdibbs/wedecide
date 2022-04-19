@@ -1,80 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>WeDecide</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/voters/vendors/css/vendor.bundle.base.css" />
 
-<head>
-  <!-- Required meta tags -->
-  <script src="./face-api.js"></script>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>WeDecide</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="../voters/vendors/feather/feather.css" />
-  <link rel="stylesheet" href="/voters/vendors/ti-icons/css/themify-icons.css" />
-  <link rel="stylesheet" href="/voters/vendors/css/vendor.bundle.base.css" />
-  <link href="fontawesome/css/all.css" rel="stylesheet" />
-  <script defer src="fontawesome/js/all.js"></script>
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="voters/css/vertical-layout-light/style.css" />
-  <link rel="stylesheet" href="voters/css/loading.css" />
-  <!-- endinject -->
-</head>
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="voters/css/vertical-layout-light/style.css" />
+    <!-- endinject -->
+  </head>
 
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_sidebar.html -->
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
 
-      <!-- partial -->
-      <div class="main-panel col-lg-12 col-12">
-        <div id="container" class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Facial Verification</h4>
-                  <p>
-                    Please Upload A Recent Image of You
-                  </p>
+        <!-- partial -->
+        <div class="main-panel col-lg-12 col-12">
+          <div id="container" class="content-wrapper">
+            <div class="row">
+              <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Facial Verification</h4>
+                    <p>Please let take picture of you to comfirm</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 stretch-card grid-margin">
-              <img id="myImage0" height="320" width="320" src="<%= result.face_path %> " crossorigin="anonymous"
-                alt="" />
-            </div>
-            <div class="col-md-6 stretch-card grid-margin">
-              <div class="row">
-                <img height="320" width="320" id="myImage1" src="#" alt="your image" />
-                <input accept="image/*" type="file" id="imgInp" />
+            <div class="main-content">
+              <div
+                class="card border mx-auto position-relative cam-wrap"
+                style="
+                  min-height: 400px;
+                  width: 400px;
+                  height: 400px;
+                  max-width: 90%;
+                  border-style: dashed !important;
+                "
+              >
+                <div class="card-image h-100 w-100">
+                  <img
+                    src="<%= result.face_path %>"
+                    alt=""
+                    class="invisible"
+                    id="user-image"
+                    crossorigin="anonymous"
+                    style="
+                      display: block;
+                      height: 100%;
+                      width: 100%;
+                      border-radius: inherit;
+                    "
+                  />
+                </div>
+                <!-- display camera stream -->
+                <video
+                  src="#"
+                  id="cam-video"
+                  autoplay
+                  style="
+                    top: 0;
+                    left: 0;
+                    object-fit: fill;
+                    height: 100%;
+                    width: 100%;
+                    border-radius: inherit;
+                  "
+                  class="display_camera d-none position-absolute"
+                ></video>
+
+                <!-- display capture image -->
+                <canvas
+                  style="
+                    top: 0;
+                    left: 0;
+                    border-radius: inherit;
+                    position: absolute;
+                  "
+                  id="capture_canvas"
+                  class="d-none"
+                ></canvas>
+                <canvas
+                  style="
+                    top: 0;
+                    left: 0;
+                    border-radius: inherit;
+                    position: absolute;
+                  "
+                  id="user_canvas"
+                  class="invisible"
+                ></canvas>
+
+                <!-- store captured image -->
+                <input
+                  type="file"
+                  name="compare"
+                  id="c_im"
+                  aria-hidden="true"
+                  hidden
+                />
+              </div>
+              <div
+                class="form-group mt-3"
+                style="width: max-content; margin: auto"
+              >
+                <button class="btn btn-info" id="startCam">Start Camera</button>
+                <button class="btn btn-info" id="captureCam" disabled>
+                  Capture
+                </button>
+                <button class="btn btn-info" id="stopCam" disabled>
+                  Stop Camera
+                </button>
+                <button class="btn btn-primary" id="recaptureCam" disabled>
+                  Recapture
+                </button>
+                <button class="btn btn-primary" id="verifyCam" disabled>
+                  Verify
+                </button>
               </div>
             </div>
-          </div>
 
-          <!-- <div class="row">
+            <!-- <div class="row">
               <button
                 class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
               >
                 Check
               </button>
             </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- page-body-wrapper ends -->
+      <div
+        class="backdrop d-none"
+        id="backdrop"
+        style="
+          position: fixed;
+          top: 0;
+          height: 100vh;
+          width: 100vw;
+          left: 0;
+          display: grid;
+          place-items: center;
+          background: rgba(0, 0, 0, 0.8);
+        "
+      >
+        <div class="spinner-grow text-light" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
       </div>
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="voters/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <!-- <script src="voters/vendors/js/vendor.bundle.base.js"></script> -->
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script>
     container = document.getElementById('container')
 
     var button = document.createElement('button')
@@ -172,10 +264,157 @@
         window.setTimeout(reDir, 5000)
       }
     }
-  </script>
-  <script src="voters/js/hoverable-collapse.js"></script>
-  <script src="voters/js/template.js"></script>
-  <!-- endinject -->
-</body>
+  </script> -->
 
+    <!-- endinject -->
+    <script>
+      const cam_wrap = document.querySelector(".cam-wrap");
+      const capture_image = document.getElementById("c_im");
+      const startCamBtn = document.getElementById("startCam");
+      const stopCamBtn = document.getElementById("stopCam");
+      const captureCamBtn = document.getElementById("captureCam");
+      const recaptureCamBtn = document.getElementById("recaptureCam");
+      const verifyBtn = document.getElementById("verifyCam");
+      const userImage = document.getElementById("user-image");
+      const _captureCanvas = document.getElementById("capture_canvas");
+      const _userCanvas = document.getElementById("user_canvas");
+      const backdrop = document.getElementById("backdrop").classList;
+      var w,
+        h,
+        video,
+        webcamStream,
+        ctx = _captureCanvas.getContext("2d");
+      ctx2 = _userCanvas.getContext("2d");
+
+      //--------------------
+      // GET USER MEDIA CODE
+      //--------------------
+      navigator.getUserMedia =
+        navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+
+      startCamBtn.onclick = startWebcam;
+      stopCamBtn.onclick = stopWebcam;
+      captureCamBtn.onclick = snapshot;
+      recaptureCamBtn.onclick = reCapture;
+      verifyBtn.onclick = verifyImage;
+
+      function startWebcam() {
+        if (navigator.getUserMedia) {
+          navigator.getUserMedia(
+            // constraints
+            {
+              video: true,
+              audio: false,
+            },
+
+            // successCallback
+            function (localMediaStream) {
+              video = document.getElementById("cam-video");
+              video.classList.remove("d-none");
+              video.srcObject = localMediaStream;
+              webcamStream = localMediaStream;
+
+              startCamBtn.disabled = true;
+              captureCamBtn.disabled = false;
+              recaptureCamBtn.disabled = true;
+              verifyBtn.disabled = true;
+              stopCamBtn.disabled = false;
+            },
+
+            // errorCallback
+            function (err) {
+              console.log("The following error occured: " + err);
+            }
+          );
+        } else {
+          console.log("getUserMedia not supported");
+        }
+      }
+
+      function stopWebcam() {
+        webcamStream.stop();
+        startCamBtn.disabled = false;
+        captureCamBtn.disabled = true;
+        recaptureCamBtn.disabled = true;
+        stopCamBtn.disabled = true;
+      }
+
+      function snapshot() {
+        // Draws current image from the video element into the _captureCanvas
+        _captureCanvas.classList.replace("d-none", "d-initial");
+
+        var c = window.innerWidth;
+
+        switch (true) {
+          case c >= 500:
+            (w = 400), (h = 400);
+            break;
+          case c < 500:
+            (w = c / 2), (h = c / 2);
+
+            break;
+        }
+        _captureCanvas.width = w;
+        _captureCanvas.height = h;
+        ctx.drawImage(video, 0, 0, w, h);
+
+        video.srcObject = null;
+        video.classList.add("d-none");
+
+        captureCamBtn.disabled = true;
+        recaptureCamBtn.disabled = false;
+        verifyBtn.disabled = false;
+        stopCamBtn.disabled = true;
+      }
+
+      function reCapture() {
+        startWebcam();
+        _captureCanvas.classList.replace("d-initial", "d-none");
+      }
+
+      // verify captured image;
+      async function verifyImage() {
+        backdrop.remove("d-none");
+        verifyBtn.disabled = true;
+
+        var dataUrl = _captureCanvas.toDataURL();
+
+        try {
+          ctx2.drawImage(userImage, 0, 0, w, h);
+        } catch (error) {
+          return alert("Poor Connection: Refresh page and try again");
+        }
+        var user = _userCanvas.toDataURL();
+
+        var options = {
+          method: "POST",
+          body: JSON.stringify({
+            imgBase64Target: dataUrl,
+            imgBase64Source: user,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        var checkImage = await fetch("/voter/face-check", options);
+        var { matched, err } = await checkImage.json();
+
+        console.log({ matched });
+        if (matched) {
+          return (window.location.href = "/voter/election-center");
+        }
+
+        if (err) {
+          return alert("Verification failed: Try again");
+        }
+        alert("Face does not match: Try again");
+        backdrop.add("d-none");
+        verifyBtn.disabled = false;
+      }
+    </script>
+  </body>
 </html>
