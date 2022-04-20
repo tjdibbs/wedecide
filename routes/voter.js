@@ -293,7 +293,10 @@ router.post("/contest-register", async (req, res) => {
 
     if (error) return Error("Email not sent");
 
-    req.flash("success", "Your voucher has been sent to your email.");
+    req.flash(
+      "success",
+      "Your voucher has been sent to your email. Do check your spam messages"
+    );
     res.redirect("/voter/contest-vote");
   } catch (error) {
     if (error?.keyValue) {

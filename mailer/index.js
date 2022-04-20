@@ -31,7 +31,7 @@ async function Emailer(email, text) {
 
   const msg = {
     to: email, // Change to your recipient
-    from: "oderindejames02@gmail.com", // Change to your verified sender
+    from: "wedecideInfo@gmail.com", // Change to your verified sender
     subject: "Wedecide Login Details",
     text,
   };
