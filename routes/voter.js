@@ -278,6 +278,10 @@ router.post("/contest-register", async (req, res) => {
   if (!contest || !name || !email || !phone) throw Error("All fields require");
 
   try {
+    const text = `Good Day ${name}! \nYou can now partcipate in the contest: ${contest_name} by voting for your favorite contestant , Here is your vouchar \n${voucher}`;
+    const { error, response } = await Emailer(email, text);
+
+    if (error) throw Error("Email not sent: Please contact support");
     const newContestVoter = new Models.ContestVoterModel({
       name,
       email,
@@ -288,14 +292,9 @@ router.post("/contest-register", async (req, res) => {
 
     await newContestVoter.save();
 
-    const text = `Good Day ${name}! \nYou can now partcipate in the contest: ${contest_name} by voting for your favorite contestant , Here is your vouchar \n${voucher}`;
-    const { error, response } = await Emailer(email, text);
-
-    if (error) return Error("Email not sent");
-
     req.flash(
       "success",
-      "Your voucher has been sent to your email. Do check your spam messages"
+      "Your voucher has been sent to your email. You are ready to participate in the contest"
     );
     res.redirect("/voter/contest-vote");
   } catch (error) {

@@ -1,19 +1,19 @@
-// const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// const sgMail = require("@sendgrid/mail");
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Setting Up For Mailling
-// var transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   host: "smtp.gmail.com",
-//   port: 465,
-//   secure: "true",
-//   auth: {
-//     user: "wedecideinfo@gmail.com",
-//     pass: "Anu08101897603",
-//   },
-// });
+var transporter = nodemailer.createTransport({
+  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: "true",
+  auth: {
+    user: "wedecideinfo@gmail.com",
+    pass: "Anu08101897603",
+  },
+});
 
 /**
  *
@@ -29,20 +29,12 @@ async function Emailer(email, text) {
     text,
   };
 
-  const msg = {
-    to: email, // Change to your recipient
-    from: "wedecideInfo@gmail.com", // Change to your verified sender
-    subject: "Wedecide Login Details",
-    text,
-  };
-  sgMail
-    .send(msg)
-    .then((response) => {
-      return;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  try {
+    const response = await transporter.sendMail(mailOptions);
+    return response;
+  } catch (error) {
+    return { error: error.message };
+  }
 }
 
 module.exports = Emailer;
