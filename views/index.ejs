@@ -1,177 +1,233 @@
 <html>
+  <head>
+    <title>WeDecide</title>
+    <link rel="stylesheet" href="css/css.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <title>WeDecide</title>
-  <link rel="stylesheet" href="css/css.css" />
-  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-</head>
+  <body>
+    <!--------------Nav Thinz--------------->
+    <section id="nav-bar">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">WeDecide</a>
+        <a class="nav-link" href="#top">HOME </a>
+        <a class="nav-link" href="#services">ABOUT US</a>
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          ELECTION
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/voter/register-election"
+            >REGISTER FOR AN ELECTION</a
+          >
+          <a class="dropdown-item" href="/voter/vote-election"
+            >VOTE IN AN ELECTION</a
+          >
+          <a class="dropdown-item" href="/voter/register-contest"
+            >VOTE IN A CONTEST</a
+          >
+        </div>
+        <a class="nav-link" href="/login">LOGIN</a>
+        <a class="nav-link" href="/register">REGISTER</a>
+      </nav>
+    </section>
 
-<body>
-  <!--------------Nav Thinz--------------->
-  <section id="nav-bar">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="#">WeDecide</a>
-      <a class="nav-link" href="#top">HOME </a>
-      <a class="nav-link" href="#services">ABOUT US</a>
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        ELECTION
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="/voter/register-election">REGISTER FOR AN ELECTION</a>
-        <a class="dropdown-item" href="/voter/vote-election">VOTE IN AN ELECTION</a>
-        <a class="dropdown-item" href="/voter/register-contest">VOTE IN A CONTEST</a>
-      </div>
-      <a class="nav-link" href="/login">LOGIN</a>
-      <a class="nav-link" href="/register">REGISTER</a>
-
-    </nav>
-  </section>
-
-  <!--------------Slider Thinz--------------->
-  <div id="slider">
-    <div id="headerSlider" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
-        <li data-target="#headerSlider" data-slide-to="1"></li>
-        <li data-target="#headerSlider" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="images/vote (1).jpg" class="d-block img-fluid" alt="Register" />
-          <div class="carousel-caption">
-            <h5>Create An Election Poll</h5>
+    <!--------------Slider Thinz--------------->
+    <div id="slider">
+      <div id="headerSlider" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
+          <li data-target="#headerSlider" data-slide-to="1"></li>
+          <li data-target="#headerSlider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="/images/vote (1).jpg"
+              class="d-block img-fluid"
+              alt="Register"
+            />
+            <div class="carousel-caption">
+              <h5>Create An Election Poll</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="/images/vote (4).jpg"
+              class="d-block img-fluid"
+              alt="Login"
+            />
+            <div class="carousel-caption">
+              <h5 style="background-color: rgba(2, 2, 2, 0.1)">
+                Register the Candidate
+              </h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="/images/vote (3).jpg"
+              class="d-block img-fluid"
+              alt="Vote"
+            />
           </div>
         </div>
-        <div class="carousel-item">
-          <img src="images/vote (4).jpg" class="d-block img-fluid" alt="Login" />
-          <div class="carousel-caption">
-            <h5 style="background-color: rgba(2, 2, 2, 0.1);">Register the Candidate</h5>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="images/vote (3).jpg" class="d-block img-fluid" alt="Vote" />
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#headerSlider" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#headerSlider" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-
-  <!---------------Services-------------->
-  <section id="services">
-    <div class="container">
-      <h1>About Us</h1>
-      <div class="row services">
-        Leadership is the strength of any group,
-        society or country in which some set of people with
-        leadership abilities hold important positions to make
-        decisions on behalf of the general public.
-        To put leaders in place, an acceptable and
-        transparent process is adopted. Voting is a
-        process of electing representatives involved
-        in decision making into offices.
-        As a need to transit into a post pandemic system,
-        electronic voting is an appropriate method of voting
-        as opposed to the conventional paper method of voting.
-        We decide is an electronic voting site built under high
-        technicality and dexterity by technical individuals.
-        It is flexible and easy to use with transparency,
-        accuracy and neutrality.
-        A mobile phone and a good internet connection is
-        required. We decide is of high standards as it needs
-        biometric or facial verification of a pre-registered voter
-        which curbs multiple votes by one voter, hence accountability
-        of votes.
-        An interesting feature of the site is that
-        it is useful for multiple purposes,
-        it can also be used for contests.
+        <a
+          class="carousel-control-prev"
+          href="#headerSlider"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#headerSlider"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
     </div>
-  </section>
 
-  <!---------------Get In Touch-------------->
-  <section id="contact">
-    <div class="container">
-      <h1>Get In Touch</h1>
-      <div class="row">
-        <div class="col-md-6">
-          <form action="/feedback" method="POST" class="contact-form">
-            <div class="form-group">
-              <input name="name" required type="text" class="form-control" placeholder="Your Name" />
-            </div>
+    <!---------------Services-------------->
+    <section id="services">
+      <div class="container">
+        <h1>About Us</h1>
+        <div class="row services">
+          Leadership is the strength of any group, society or country in which
+          some set of people with leadership abilities hold important positions
+          to make decisions on behalf of the general public. To put leaders in
+          place, an acceptable and transparent process is adopted. Voting is a
+          process of electing representatives involved in decision making into
+          offices. As a need to transit into a post pandemic system, electronic
+          voting is an appropriate method of voting as opposed to the
+          conventional paper method of voting. We decide is an electronic voting
+          site built under high technicality and dexterity by technical
+          individuals. It is flexible and easy to use with transparency,
+          accuracy and neutrality. A mobile phone and a good internet connection
+          is required. We decide is of high standards as it needs biometric or
+          facial verification of a pre-registered voter which curbs multiple
+          votes by one voter, hence accountability of votes. An interesting
+          feature of the site is that it is useful for multiple purposes, it can
+          also be used for contests.
+        </div>
+      </div>
+    </section>
 
-            <div class="form-group">
-              <input name="phone" required type="number" class="form-control" placeholder="Phone No." />
-            </div>
+    <!---------------Get In Touch-------------->
+    <section id="contact">
+      <div class="container">
+        <h1>Get In Touch</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <form action="/feedback" method="POST" class="contact-form">
+              <div class="form-group">
+                <input
+                  name="name"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Your Name"
+                />
+              </div>
 
-            <div class="form-group">
-              <input name="email" required type="email" class="form-control" placeholder="Email id" />
-            </div>
+              <div class="form-group">
+                <input
+                  name="phone"
+                  required
+                  type="number"
+                  class="form-control"
+                  placeholder="Phone No."
+                />
+              </div>
 
-            <div class="form-group">
-              <textarea required name="message" class="form-control" rows="4" placeholder="Your Message">
+              <div class="form-group">
+                <input
+                  name="email"
+                  required
+                  type="email"
+                  class="form-control"
+                  placeholder="Email id"
+                />
+              </div>
+
+              <div class="form-group">
+                <textarea
+                  required
+                  name="message"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Your Message"
+                >
                 </textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                SEND MESSAGE
+              </button>
+            </form>
+          </div>
+          <div class="col-md-6 contact-info">
+            <div class="follow">
+              <b>Address:</b>
+              <i class="fa fa-map-marker"></i>
+              University Of Ibadan
             </div>
-            <button type="submit" class="btn btn-primary">
-              SEND MESSAGE
-            </button>
-          </form>
-        </div>
-        <div class="col-md-6 contact-info">
-          <div class="follow">
-            <b>Address:</b>
-            <i class="fa fa-map-marker"></i>
-            University Of Ibadan
-          </div>
 
-          <div class="follow">
-            <b>Phone:</b>
-            <i class="fa fa-phone"></i>
-            +234 810 189 7603
-          </div>
+            <div class="follow">
+              <b>Phone:</b>
+              <i class="fa fa-phone"></i>
+              +234 810 189 7603
+            </div>
 
-          <div class="follow">
-            <b>Email:</b>
-            <i class="fa fa-envelope-o"></i>
-            wedecidebyvoting@gmail.com
-          </div>
+            <div class="follow">
+              <b>Email:</b>
+              <i class="fa fa-envelope-o"></i>
+              wedecidebyvoting@gmail.com
+            </div>
 
-          <div class="follow">
-            <label><b>Get Social:</b></label>
-            <a href="https://wa.me/+2348101897603"><i class="fa fa-whatsapp"></i></a>
-            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <div class="follow">
+              <label><b>Get Social:</b></label>
+              <a href="https://wa.me/+2348101897603"
+                ><i class="fa fa-whatsapp"></i
+              ></a>
+              <a href="#"><i class="fa fa-google-plus"></i></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!---------------Footer-------------->
-  <section id="footer">
-    <div class="container text-center">
-      <p>
-        Made by Hodaviahtechnologyagency
-      </p>
-    </div>
-  </section>
+    <!---------------Footer-------------->
+    <section id="footer">
+      <div class="container text-center">
+        <p>Made by Hodaviahtechnologyagency</p>
+      </div>
+    </section>
 
-  <!---------------Footer End-------------->
-  <!-- <script src="js/smooth-scroll.js"></script>
+    <!---------------Footer End-------------->
+    <!-- <script src="js/smooth-scroll.js"></script>
   <script>
     var scroll = new SmoothScroll('a[href*="#"]');
   </script> -->
-</body>
-
+  </body>
 </html>

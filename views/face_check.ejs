@@ -292,7 +292,6 @@
         navigator.msGetUserMedia;
 
       startCamBtn.onclick = startWebcam;
-      stopCamBtn.onclick = stopWebcam;
       captureCamBtn.onclick = snapshot;
       recaptureCamBtn.onclick = reCapture;
       verifyBtn.onclick = verifyImage;
@@ -321,11 +320,11 @@
 
             // errorCallback
             function (err) {
-              console.log("The following error occured: " + err);
+              alert("The following error occured: " + err);
             }
           );
         } else {
-          console.log("getUserMedia not supported");
+          alert("getUserMedia not supported");
         }
       }
 

@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>WeDecide</title>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/voters/css/vertical-layout-light/style.css" />
+    <!-- endinject -->
+  </head>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>WeDecide</title>
-  <!-- inject:css -->
-  <link rel="stylesheet" href="voters/css/vertical-layout-light/style.css" />
-  <!-- endinject -->
-</head>
-
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
-        <div class="row w-100 mx-0">
-          <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-
-              <form action="/voter/contest-vote" method="POST" class="pt-3" autocomplete="new-form">
-                <%- include("message") -%>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <form
+                  action="/voter/contest-vote"
+                  method="POST"
+                  class="pt-3"
+                  autocomplete="new-form"
+                >
+                  <%- include("message") -%>
                   <div class="form-group">
-                    <input required name="vouchar" value="<%= formData?.vouchar %>" type="text"
-                      class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Vouchar"
-                      autocomplete="off" />
+                    <input
+                      required
+                      name="vouchar"
+                      value="<%= formData?.vouchar %>"
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="exampleInputUsername1"
+                      placeholder="Vouchar"
+                      autocomplete="off"
+                    />
                   </div>
 
                   <div class="mt-3">
-                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                    <button
+                      type="submit"
+                      class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                    >
                       LET VOTE
                     </button>
                   </div>
@@ -38,16 +54,15 @@
                       Register To Get A Vouchar
                     </a>
                   </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+        <!-- content-wrapper ends -->
       </div>
-      <!-- content-wrapper ends -->
+      <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-</body>
-
+    <!-- container-scroller -->
+  </body>
 </html>
