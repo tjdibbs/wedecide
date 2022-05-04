@@ -5,13 +5,12 @@ const nodemailer = require("nodemailer");
 
 // Setting Up For Mailling
 var transporter = nodemailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
+  // service: "gmail",
+  host: "mail.wedecide.com.ng",
   port: 465,
-  secure: "true",
   auth: {
-    user: "wedecideinfo@gmail.com",
-    pass: "Anu08101897603",
+    user: process.env.mail_user,
+    pass: process.env.mail_password,
   },
 });
 
@@ -23,7 +22,7 @@ var transporter = nodemailer.createTransport({
  */
 async function Emailer(email, text) {
   const mailOptions = {
-    from: "wedecideinfo@gmail.com",
+    from: "info@wedecide.com.ng",
     to: email,
     subject: "WeDecide Login Details",
     text,

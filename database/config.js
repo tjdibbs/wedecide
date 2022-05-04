@@ -8,11 +8,6 @@ class ConnectDatabase {
   }
 
   async connect() {
-    console.log({ url: this.url, password: this.password });
-    if (this.password) {
-      console.info("There is a password for the database");
-    }
-
     try {
       mongoose.connect(
         this.url,
@@ -26,7 +21,6 @@ class ConnectDatabase {
       );
       return { initializeConnection: "Database connected" };
     } catch (error) {
-      console.error({ error: error.message, count: this.count });
       this.count += 1;
 
       if (this.count >= 5) {

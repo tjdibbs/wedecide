@@ -102,6 +102,7 @@ router.post("/register-election", async (req, res) => {
       req.flash("success", "You can login as a voter of " + electionDetail[1]);
       return res.redirect("/voter/vote-election");
     } catch (error) {
+      console.log({ error });
       if (error.keyValue) {
         req.flash(
           "error",
