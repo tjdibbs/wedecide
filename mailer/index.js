@@ -8,6 +8,7 @@ var transporter = nodemailer.createTransport({
   // service: "gmail",
   host: "mail.wedecide.com.ng",
   port: 465,
+  secure: true,
   auth: {
     user: process.env.mail_user,
     pass: process.env.mail_password,
