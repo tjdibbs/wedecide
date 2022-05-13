@@ -9,6 +9,7 @@ const config = require("./config");
 const passport = require("passport");
 const path = require("path");
 const logger = require("./logger")
+const process = require('node:process');
 
 app.use(cookieParser());
 app.set("view engine", "ejs");
@@ -33,11 +34,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
-process.on("uncaughtException", (ev)=>{
-    console.log(ev.stack);
-    console.log({ev})
-})
+process.on('uncaughtException', (err, origin) => {
+    fs.writeSync(
+        process.stderr.fd,
+        `Caught exception: ${err}\n` +
+        `Exception origin: ${origin}`
+    );
+});
 
 // // Database Section
 (async () => {
