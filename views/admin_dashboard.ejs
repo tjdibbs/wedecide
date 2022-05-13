@@ -190,13 +190,13 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <% for( let index=0; index < result.elections.length; index++ ) { %>
+                        <% for( let app=0; app < result.elections.length; app++ ) { %>
                           <tr>
                             <td>
-                              <%= result.elections[index]?.name %>
+                              <%= result.elections[app]?.name %>
                             </td>
                             <td>
-                              <%= result.elections[index]?.polls %>
+                              <%= result.elections[app]?.polls %>
                             </td>
                             <td>
                               <label class="badge badge-gradient-success">
@@ -204,7 +204,7 @@
                               </label>
                             </td>
                             <td>
-                              <%= result.elections[index]?.end_date %>
+                              <%= result.elections[app]?.end_date %>
                             </td>
                           </tr>
                           <% } %>

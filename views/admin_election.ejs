@@ -154,13 +154,13 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% for( let index=0; index < result.polls.length; index++ ) { %>
+                          <% for( let app=0; app < result.polls.length; app++ ) { %>
                             <tr>
                               <td>
-                                <%= result.polls[index].name %>
+                                <%= result.polls[app].name %>
                               </td>
                               <td>
-                                <a href="/admin/election/delete-poll/<%= result.polls[index]._id %>">
+                                <a href="/admin/election/delete-poll/<%= result.polls[app]._id %>">
                                   <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw">
                                     Delete
                                   </button>
@@ -185,9 +185,9 @@
                       <div class="form-group">
                         <label for="exampleTextarea1">Positions</label>
                         <select name="position" class="form-control form-control-lg" id="exampleFormControlSelect2">
-                          <% for( let index=0; index < result.polls.length; index++ ) { %>
-                            <option value="<%= result.polls[index]._id %>">
-                              <%= result.polls[index].name %>
+                          <% for( let app=0; app < result.polls.length; app++ ) { %>
+                            <option value="<%= result.polls[app]._id %>">
+                              <%= result.polls[app].name %>
                             </option>
                             <% } %>
                         </select>
@@ -219,24 +219,24 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% for( let index=0; index < result.candidates.length; index++ ) { %>
+                          <% for( let app=0; app < result.candidates.length; app++ ) { %>
                             <tr>
                               <td>
-                                <%= result.candidates[index].name %>
+                                <%= result.candidates[app].name %>
                               </td>
                               <td>
                                 <% for( let index0=0; index0 < result.polls.length; index0++ ) { %>
-                                  <% if (String(result.candidates[index].poll_id)===String(result.polls[index0]._id)) {
+                                  <% if (String(result.candidates[app].poll_id)===String(result.polls[index0]._id)) {
                                     %>
                                     <%= result.polls[index0].name %>
                                       <% } %>
                                         <% } %>
                               </td>
                               <td>
-                                <%= result.candidates[index].vote %>
+                                <%= result.candidates[app].vote %>
                               </td>
                               <td> <a
-                                  href="/admin/election/delete-candidate/<%= result.candidates[index]._id %>"><button
+                                  href="/admin/election/delete-candidate/<%= result.candidates[app]._id %>"><button
                                     type="button" class="btn btn-gradient-danger btn-rounded btn-fw">
                                     Delete
                                   </button>
@@ -266,15 +266,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% for( let index=0; index < result.voters.length; index++ ) { %>
+                          <% for( let app=0; app < result.voters.length; app++ ) { %>
                             <tr>
                               <td>
-                                <%= result.voters[index].username %>
+                                <%= result.voters[app].username %>
                               </td>
                               <td>
-                                <%= result.voters[index].email %>
+                                <%= result.voters[app].email %>
                               </td>
-                              <% if (result.voters[index].vote==0) { %>
+                              <% if (result.voters[app].vote==0) { %>
                                 <td><label class="badge badge-gradient-danger">
                                     Not Voted
                                   </label></td>

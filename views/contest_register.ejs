@@ -27,10 +27,10 @@
                   <div class="form-group">
                     <select name="contest" class="form-control form-control-lg" id="exampleFormControlSelect2">
 
-                      <% for( let index=0; index < result.length; index++ ) { %>
-                        <option selected="<%= formData?.contest?.split(" /")[1]===result[index].name%>" value="<%=
-                            result[index]._id %>/<%= result[index].name %>">
-                              <%= result[index].name %>
+                      <% for( let app=0; app < result.length; app++ ) { %>
+                        <option selected="<%= formData?.contest?.split(" /")[1]===result[app].name%>" value="<%=
+                            result[app]._id %>/<%= result[app].name %>">
+                              <%= result[app].name %>
                         </option>
                         <% } %>
                     </select>

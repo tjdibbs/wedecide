@@ -82,27 +82,27 @@
                       method="POST"
                       class="forms-sample"
                     >
-                      <% for( let index=0; index < result.polls.length; index++
+                      <% for( let app=0; app < result.polls.length; app++
                       ) { %> <% var
                       pollHascontestants=result.contestants.filter((contestants)=>
-                      String(contestants.poll_id)===String(result.polls[index]._id));
+                      String(contestants.poll_id)===String(result.polls[app]._id));
                       if(!pollHascontestants?.length) continue %>
                       <div class="form-group">
                         <label for="exampleInputName1">
-                          <%= result.polls[index].name %>
+                          <%= result.polls[app].name %>
                         </label>
                         <% pollHascontestants.map((contestants)=>{ %>
                         <div class="form-check form-check-inline">
                           <input
                             type="radio"
                             class="form-check-input"
-                            name="<%= result.polls[index]._id %>/<%= result.polls[index].name %>"
+                            name="<%= result.polls[app]._id %>/<%= result.polls[app].name %>"
                             value="<%= contestants._id %>"
-                            id="<%= result.polls[index]._id %>"
+                            id="<%= result.polls[app]._id %>"
                           />
                           <label
                             class="form-check-label d-inline ml-0"
-                            for="<%= result.polls[index]._id %>"
+                            for="<%= result.polls[app]._id %>"
                           >
                             <%= contestants.name %>
                           </label>

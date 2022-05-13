@@ -37,11 +37,11 @@
                       class="form-control form-control-lg"
                       id="exampleFormControlSelect2"
                     >
-                      <% for( let index=0; index < result.length; index++ ) { %>
+                      <% for( let app=0; app < result.length; app++ ) { %>
                       <option
-                        value="<%= result[index]._id %>/<%= result[index].name %>"
+                        value="<%= result[app]._id %>/<%= result[app].name %>"
                       >
-                        <%= result[index].name %>
+                        <%= result[app].name %>
                       </option>
                       <% } %>
                     </select>

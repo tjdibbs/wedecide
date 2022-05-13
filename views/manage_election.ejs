@@ -141,24 +141,24 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% for( let index=0; index < result.length; index++ ) { %>
+                          <% for( let app=0; app < result.length; app++ ) { %>
                             <tr>
                               <td>
-                                <%= result[index].name %>
+                                <%= result[app].name %>
                               </td>
-                              <td> <a href="/admin/election/<%- result[index]._id %>"><button type="button"
+                              <td> <a href="/admin/election/<%- result[app]._id %>"><button type="button"
                                     class="btn btn-gradient-warning btn-rounded btn-fw">
                                     Edit
                                   </button></a></td>
-                              <td> <a href="/admin/election/delete-election/<%- result[index]._id %>"><button
+                              <td> <a href="/admin/election/delete-election/<%- result[app]._id %>"><button
                                     type="button" class="btn btn-gradient-danger btn-rounded btn-fw">
                                     Delete
                                   </button></a></td>
                               <td>
-                                <% if (result[index].paid==0) { %>
-                                  <a class="text-danger" href="/admin/election/pay/<%- result[index]._id %>"> Pay Now
+                                <% if (result[app].paid==0) { %>
+                                  <a class="text-danger" href="/admin/election/pay/<%- result[app]._id %>"> Pay Now
                                   </a>
-                                  <% } else if (result[index].paid==1) { %>
+                                  <% } else if (result[app].paid==1) { %>
                                     <label> Paid </label>
                                     <% } %>
                               </td>

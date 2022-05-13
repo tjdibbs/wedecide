@@ -1,20 +1,16 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const express = require("express");
-const fs = require("fs");
 const Models = require("../model");
 const formidable = require("formidable");
 const { v4: uuidv4 } = require("uuid");
 const jwt = require("jsonwebtoken");
 const verify = require("../config/validateContestVoter");
 const verifyElection = require("../config/validateElectionVote");
-const path = require("path");
 const Emailer = require("../mailer");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("cloudinary");
 const AWS = require("aws-sdk");
-const axios = require("axios");
-const { uploadFile } = require("./s3");
 
 router.use(express.static("public"));
 
@@ -150,7 +146,7 @@ router.post("/vote-election", async (req, res) => {
     const details = election.split("/");
     const VotingElection = await Models.VoterModel.findOne({
       username: username,
-      election_id: mongoose.Types.ObjectId(details[0]),
+      election_id: details[0],
     });
 
     const compare = await bcrypt.compare(
@@ -200,7 +196,6 @@ router.get("/face-check", verifyElection, async (req, res) => {
     return res.status(200).render("face_check", { result: ElectionVotes });
 
   res.clearCookie("election_auth", { path: "/" });
-  const elections = await Models.ElectionModel.find({}).lean();
 
   req.flash("error", "Access Denied!");
   return res.status(404).redirect("/voter/vote-election");
@@ -210,11 +205,11 @@ router.post("/face-check", verifyElection, async (req, res, next) => {
   const body = req.body;
 
   function getBinary(base64Image) {
-    var binaryImg = atob(base64Image);
-    var length = binaryImg.length;
-    var ab = new ArrayBuffer(length);
-    var ua = new Uint8Array(ab);
-    for (var i = 0; i < length; i++) {
+    const binaryImg = atob(base64Image);
+    const length = binaryImg.length;
+    const ab = new ArrayBuffer(length);
+    const ua = new Uint8Array(ab);
+    for (let i = 0; i < length; i++) {
       ua[i] = binaryImg.charCodeAt(i);
     }
 
@@ -222,13 +217,13 @@ router.post("/face-check", verifyElection, async (req, res, next) => {
   }
 
   try {
-    var base64ImageTarget = body.imgBase64Target.replace(
-      /^data:image\/(png|jpeg|jpg);base64,/,
-      ""
+    const base64ImageTarget = body.imgBase64Target.replace(
+        /^data:image\/(png|jpeg|jpg);base64,/,
+        ""
     );
-    var base64ImageSource = body.imgBase64Source.replace(
-      /^data:image\/(png|jpeg|jpg);base64,/,
-      ""
+    const base64ImageSource = body.imgBase64Source.replace(
+        /^data:image\/(png|jpeg|jpg);base64,/,
+        ""
     );
     const target = getBinary(base64ImageTarget);
     const source = getBinary(base64ImageSource);
@@ -244,7 +239,7 @@ router.post("/face-check", verifyElection, async (req, res, next) => {
       SimilarityThreshold: 70,
     };
 
-    client.compareFaces(params, function (err, response) {
+    client.compareFaces(params, function (err) {
       if (err) return res.json({ matched: false });
       return res.json({ matched: true });
     });
@@ -269,7 +264,7 @@ router.get("/register-contest", async (req, res) => {
 
 //************To Get info about the voter (Contest) and send an email with his/her vouchar details */
 router.post("/contest-register", async (req, res) => {
-  const { contest, name, email, phone, cardName, cardNo, mmyy, cvv } = req.body;
+  const { contest, name, email, phone } = req.body;
 
   const detailArr = contest.split("/");
   const contest_id = detailArr[0].trim();
@@ -409,12 +404,12 @@ router.post("/election-center", verifyElection, async (req, res) => {
   const token = jwt.decode(req.cookies.election_auth);
   const voter_id = token.id;
   const election_id = token.election_id;
-  var formData = req.body;
+  const formData = req.body;
   const browser_fingerprint = formData.browser_fingerprint;
 
   delete formData.browser_fingerprint;
-  var candidate_ids = Object.values(formData); // array of names of the poll
-  var poll_ids = Object.keys(formData)?.map((id) => id.split("/")[0]); // array of names of the poll
+  const candidate_ids = Object.values(formData); // array of names of the poll
+  const poll_ids = Object.keys(formData)?.map((id) => id.split("/")[0]); // array of names of the poll
 
   if (!candidate_ids?.length) {
     req.flash("error", "Vote for at least one contestant");
@@ -505,14 +500,14 @@ router.post("/contest-center", verify, async (req, res) => {
   const voter_email = token.voter_email;
   const contest_id = token.id;
 
-  var formData = req.body;
-  var browser_fingerprint = formData.browser_fingerprint;
+  const formData = req.body;
+  const browser_fingerprint = formData.browser_fingerprint;
 
   const text = `Good Day ${voter_name}! \nThank You for partcipating in the contest by voting for your favorite contestant.`;
 
   delete formData.browser_fingerprint;
-  var candidate_ids = Object.values(formData);
-  var poll_ids = Object.keys(formData)?.map((id) => id.split("/")[0]); // array of names of the poll
+  const candidate_ids = Object.values(formData);
+  const poll_ids = Object.keys(formData)?.map((id) => id.split("/")[0]); // array of names of the poll
 
   if (!candidate_ids?.length) {
     req.flash("error", "Vote for at least one contestant");

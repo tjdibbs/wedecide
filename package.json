@@ -2,9 +2,9 @@
 	"name": "wedecide",
 	"version": "1.0.0",
 	"description": "We decide is an electronic voting site built under high technicality and dexterity by technical individuals. It is flexible and easy to use with transparency, accuracy and neutrality.",
-	"main": "index.js",
+	"main": "app.js",
 	"scripts": {
-		"start": "nodemon index.js"
+		"start": "nodemon app.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -32,6 +32,7 @@
 		"formidable": "^2.0.1",
 		"jsonwebtoken": "^8.5.1",
 		"lodash": "^4.17.21",
+		"log4js": "^6.4.6",
 		"mobile-detect": "^1.4.5",
 		"mongoose": "^6.2.3",
 		"nodemailer": "^6.6.5",
