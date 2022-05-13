@@ -33,6 +33,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+process.on("uncaughtException", (ev)=>{
+    console.log(ev.stack);
+    console.log({ev})
+})
+
 // // Database Section
 (async () => {
   await new ConnectDatabase(process.env.database_url).connect();

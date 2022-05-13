@@ -265,15 +265,14 @@ router.get("/register-contest", async (req, res) => {
 //************To Get info about the voter (Contest) and send an email with his/her vouchar details */
 router.post("/contest-register", async (req, res) => {
   const { contest, name, email, phone } = req.body;
-
-  const detailArr = contest.split("/");
-  const contest_id = detailArr[0].trim();
-  const contest_name = detailArr[1].trim();
-  const voucher = `cv-${uuidv4()}`;
-
-  if (!contest || !name || !email || !phone) throw Error("All fields require");
-
   try {
+    const detailArr = contest.split("/");
+    const contest_id = detailArr[0].trim();
+    const contest_name = detailArr[1].trim();
+    const voucher = `cv-${uuidv4()}`;
+
+    if (!contest || !name || !email || !phone) throw Error("All fields require");
+
     const text = `Good Day ${name}! \nYou can now partcipate in the contest: ${contest_name} by voting for your favorite contestant , Here is your vouchar \n${voucher}`;
     const { error, response } = await Emailer(email, text);
 
@@ -294,6 +293,7 @@ router.post("/contest-register", async (req, res) => {
     );
     res.redirect("/voter/contest-vote");
   } catch (error) {
+    console.log({error})
     if (error?.keyValue) {
       req.flash(
         "error",

@@ -33,8 +33,10 @@ async function Emailer(email, text) {
   try {
     const response = await transporter.sendMail(mailOptions);
     logger.debug(JSON.stringify({ response }));
+    console.log({response})
     return response;
   } catch (error) {
+    console.log({error})
     logger.debug(JSON.stringify({ error }));
     return { error: error.message };
   }
