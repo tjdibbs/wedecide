@@ -1,15 +1,14 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
+const ENV = require("dotenv").config();
 const flash = require("connect-flash");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const ConnectDatabase = require("./database/config");
 const config = require("./config");
 const passport = require("passport");
+const logger = require("./logger");
 const path = require("path");
-const logger = require("./logger")
-const process = require('node:process');
 
 app.use(cookieParser());
 app.set("view engine", "ejs");
@@ -34,20 +33,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-process.on('uncaughtException', (err, origin) => {
-    fs.writeSync(
-        process.stderr.fd,
-        `Caught exception: ${err}\n` +
-        `Exception origin: ${origin}`
-    );
+process.on("uncaughtException", (err, data) => {
+  logger.debug(JSON.stringify({ err, data }));
 });
-
-// // Database Section
-(async () => {
-  await new ConnectDatabase(process.env.database_url).connect();
-  logger.info("Database is connected");
-})();
-
 
 /**Route
  * Contains all the route to each page
@@ -59,8 +47,8 @@ app.get("/log", (req, res) => {
 });
 
 // HomePage
-const routes = require("./routes/index");
-app.use("/", routes);
+const index = require("./routes/index");
+app.use("/", index);
 
 //Login
 const login = require("./routes/login");
@@ -95,11 +83,11 @@ app.use("/voter/contest-center", contest);
 const election = require("./routes/voter");
 app.use("/voter/election-center", election);
 
-app.use((req, res) => {
+app.use((req, res, next) => {
   res.status(404).render("error-404");
 });
 
 // Port
 app.listen(config.PORT, (data) => {
-  console.log("Now Listening on http://localhost:8000");
+  console.log("Now Listening on http://localhost:" + config.PORT);
 });

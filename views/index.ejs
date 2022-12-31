@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2/css/bootstrap.min.css"
     />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -22,27 +22,29 @@
         <a class="navbar-brand" href="#">WeDecide</a>
         <a class="nav-link" href="#top">HOME </a>
         <a class="nav-link" href="#services">ABOUT US</a>
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          ELECTION
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/voter/register-election"
-            >REGISTER FOR AN ELECTION</a
+        <div class="dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
           >
-          <a class="dropdown-item" href="/voter/vote-election"
-            >VOTE IN AN ELECTION</a
-          >
-          <a class="dropdown-item" href="/voter/register-contest"
-            >VOTE IN A CONTEST</a
-          >
+            ELECTION
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/voter/register-election"
+              >REGISTER FOR AN ELECTION</a
+            >
+            <a class="dropdown-item" href="/voter/vote-election"
+              >VOTE IN AN ELECTION</a
+            >
+            <a class="dropdown-item" href="/voter/register-contest"
+              >VOTE IN A CONTEST</a
+            >
+          </div>
         </div>
         <a class="nav-link" href="/login">LOGIN</a>
         <a class="nav-link" href="/register">REGISTER</a>
@@ -225,6 +227,7 @@
     </section>
 
     <!---------------Footer End-------------->
+    <script src="/js/bootstrap.min.js"></script>
     <!-- <script src="js/smooth-scroll.js"></script>
   <script>
     var scroll = new SmoothScroll('a[href*="#"]');

@@ -1,12 +1,7 @@
 const nodemailer = require("nodemailer");
-const logger = require("../logger");
-
-// const sgMail = require("@sendgrid/mail");
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Setting Up For Mailling
 const transporter = nodemailer.createTransport({
-  // service: "gmail",
   host: "mail.wedecide.com.ng",
   port: 465,
   secure: true,
@@ -32,12 +27,10 @@ async function Emailer(email, text) {
 
   try {
     const response = await transporter.sendMail(mailOptions);
-    logger.debug(JSON.stringify({ response }));
-    console.log({response})
+    console.log({ response });
     return response;
   } catch (error) {
-    console.log({error})
-    logger.debug(JSON.stringify({ error }));
+    console.log({ error });
     return { error: error.message };
   }
 }

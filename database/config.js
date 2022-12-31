@@ -1,34 +1,19 @@
 const mongoose = require("mongoose");
 
-class ConnectDatabase {
-  constructor(url, password) {
-    this.url = url;
-    this.password = password ?? "";
-    this.count = 0;
-  }
+const MONGODB_URL = process.env.database_url;
 
-  async connect() {
-    try {
-      mongoose.connect(
-        this.url,
-        {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-        },
-        (err, info) => {
-          if (err) throw Error("Error connecting to database");
-        }
-      );
-      return { initializeConnection: "Database connected" };
-    } catch (error) {
-      this.count += 1;
-
-      if (this.count >= 5) {
-        throw Error;
-      }
-      this.connect();
+mongoose.connect(
+  MONGODB_URL || `mongodb://127.0.0.1:27017/zablot`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err, connected) => {
+    if (!connected) {
+      console.log("database failed to conect");
+      process.exit(1);
+    } else {
+      console.log("database connected");
     }
   }
-}
-
-module.exports = ConnectDatabase;
+);
